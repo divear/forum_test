@@ -1,0 +1,87 @@
+:root{
+    --bg:   #353535;
+    --w: rgb(224, 226, 230);
+    --brown: #302218;
+    --orange: #b78c40;
+    --postColor: #506b76;
+    --comment:#505e76;
+}
+
+
+body{
+    background-color: var(--bg);
+    color: var(--w);
+}
+.img{
+    width: 5vw;
+    height: 5vw; 
+}
+.addInputDiv{
+    margin: 0.5vw;
+}
+.inputBody{
+    width: 50%;
+    max-width: 60%;
+    min-width: 40%;
+
+    height: 10vw;
+    max-height: 20vw;
+    min-height: 5vw;
+
+    font-size: 1vw;
+    font-family:'Times New Roman', Times, serif;
+}
+.sendButton{
+    background-color: var(--orange);
+    width: 2vw;
+    height: 2vw;
+    border-radius: 1vw;
+    border: 0.1vw black solid;
+    margin: 0.1vw;
+}
+.sendSymbol{
+    width: 90%;
+    height: 100%;
+    color: var(--brown);
+}
+.post{
+    background-color: var(--postColor);
+    width: 20vw;
+    padding: 0.5vw;
+    margin: 0.5vw;
+}
+.name{
+    color: rgb(197, 196, 196);
+}
+.repliesMes{
+    color: var(--orange);
+    text-decoration: none;
+    text-decoration: underline var(--orange);
+    cursor: pointer;
+}
+.home{
+    cursor:pointer;
+}
+.cont{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 1vw;
+}
+.replies{
+    background-color: var(--comment);
+    width: 30vw;
+    margin: 2vw;
+    padding: 0.5vw;
+}
+.nameReply{
+    color: var(--orange);
+}
+.inputName{
+    width: 70%;
+    font-size: 1vw;
+}
+.inputComment{
+    position: fixed;
+    top: 1%;
+    right: 1%;
+}
