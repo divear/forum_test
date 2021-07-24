@@ -26,6 +26,7 @@ function List() {
             {data && data.map(d => {
                 return(
                     <div key={d.post_id} className="post">
+                        <button className="">Delete</button>
                         <h3 className="name">{d.username}</h3>
                         <h1 className="question">{d.body}</h1>
                         <a href={`/detail/${d.post_id}`}><h2 className="repliesMes">Show replies</h2></a>

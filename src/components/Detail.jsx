@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import img from"../logo/logo.png"
-
+import {FiSend} from "react-icons/fi"
 
 function Detail() {
     const {id} = useParams()
@@ -92,8 +92,8 @@ function Detail() {
             {/* input a body */}
   
             <form onSubmit={e => addbody(e)} className="inputComment">
-                <input value={body} onChange={(e) => setbody(e.target.value)} placeholder="your body" type="text" />
-                <button>send</button>
+                <input className="inputCom" value={body} onChange={(e) => setbody(e.target.value)} placeholder="your comment..." type="text" />
+                <button className="sendComment"><FiSend className="sendSymbol"/></button>
             </form>
 
 
