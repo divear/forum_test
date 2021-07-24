@@ -12,6 +12,8 @@ app.use(express.json())
 
 //ROUTES//
 
+//posts//
+
 //create
 
 app.post("/posts", async(req, res)=>{
@@ -36,7 +38,7 @@ app.get("/posts", async (req, res) => {
     } catch (err) {
       console.error(err.message);
     }
-  });
+});
   
 
 //get one
@@ -79,6 +81,34 @@ app.delete("/posts/:id", async(req, res)=>{
         console.log(error);
     }
 })
+
+
+//comments//
+
+app.post("/coms", async(req, res)=>{
+    try {
+        const respo = req.body
+        console.log(respo);
+        const newposts = await pool.query("INSERT INTO coms (body, username, post_id) VALUES($1, $2, $3) RETURNING *",
+         [respo[0].body, respo[1].username, respo[2].id]);
+        console.log(newposts);
+        res.json(newposts.rows[0])
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.get("/coms/:id", async(req, res)=>{
+    try {
+        const {id} = req.params
+        const posts = await pool.query("SELECT * FROM coms WHERE post_id = $1", [id])
+        
+        res.json(posts.rows)
+    } catch (error) {
+        console.log(error);
+    }
+})
+  
 
 const port = process.env.port || 4001
 

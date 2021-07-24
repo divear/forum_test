@@ -5,15 +5,36 @@ import img from"../logo/logo.png"
 
 function Detail() {
     const {id} = useParams()
-    const [comment, setComment] = useState()
+    const [body, setbody] = useState()
+    const username = localStorage.getItem("username")
 
     const [data, setData] = useState({
         username: "",
         body: ""
     });
+    
+    const [dataS, setDataS] = useState({
+        username: "",
+        body: ""
+    });
 
-    async function addComment(){
-        console.log("s");
+    async function addbody(e){
+        e.preventDefault()
+        try {
+            const Rbody = {body}
+            const Rname = {username}
+            const Rkey = {id}
+            
+            const arr = [Rbody, Rname, Rkey]
+            const response = await fetch("http://localhost:4001/coms", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(arr)
+            });
+            window.location.reload()
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     
@@ -29,7 +50,21 @@ function Detail() {
             }
         }
         getTodo()
+        async function getComments(){
+            try {
+                const response = await fetch(`http://localhost:4001/coms/${id}`);
+                const jsonData = await response.json();
+                setDataS(jsonData);
+                console.log(dataS);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getComments()
     },[])
+    useEffect(() => {
+        console.log(data);
+    }, [data])
     
     return (
         <div>
@@ -44,16 +79,24 @@ function Detail() {
             </div>
 
             {/* replies */}
-            <div className="replies">
-                <h3 className="nameReply">luke</h3>
-                <h1 className="question">idk</h1>
-            </div>
+            {dataS[0] && dataS.map(d =>{
+                return(
+                    <div className="replies">
+                        <h3 className="nameReply">{d.username}</h3>
+                        <h1 className="question">{d.body}</h1>
+                    </div>
+                )
+            })}
 
-            {/* input a comment */}
-            <form onSubmit={addComment} className="inputComment">
-                <input value={comment} setComment={e => setComment(e.target.value)} placeholder="your comment" type="text" />
+
+            {/* input a body */}
+  
+            <form onSubmit={e => addbody(e)} className="inputComment">
+                <input value={body} onChange={(e) => setbody(e.target.value)} placeholder="your body" type="text" />
                 <button>send</button>
             </form>
+
+
         </div>
     )
 }
